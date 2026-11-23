@@ -1,0 +1,58 @@
+{
+  "models": ["Line-A", "Line-B"],
+  "model": "Line-A",
+  "cases": [
+    {
+      "name": "reference-choice",
+      "measurements": {
+        "East": [["P", "e-p", "positive", "2", "2"], ["Q", "e-q", "positive", "2", "2"], ["R", "e-low", "positive", "1", "1"], ["R", "e-high", "positive", "3", "3"]],
+        "West": [["P", "w-p", "negative", "2", "2"], ["Q", "w-q", "negative", "2", "2"], ["R", "w-ref", "positive", "2", "2"]]
+      },
+      "v1_auc": ["1/2", "1/2"],
+      "requests": [
+        {"anchors": {"East": {"R": "e-low"}, "West": {"R": "w-ref"}}, "expected": {"status": "issued", "auc": ["1", "1"], "production_counts": [2, 2]}},
+        {"anchors": {"East": {"R": "e-high"}, "West": {"R": "w-ref"}}, "expected": {"status": "issued", "auc": ["0", "0"], "production_counts": [2, 2]}}
+      ]
+    },
+    {
+      "name": "exclusive-wins",
+      "measurements": {
+        "East": [["P", "e-p", "positive", "1", "1"], ["Q", "e-n", "negative", "2", "2"], ["R", "e-r", "positive", "3", "3"]],
+        "West": [["P", "w-p", "positive", "7", "7"], ["Q", "w-n", "negative", "8", "8"], ["R", "w-r", "positive", "9", "9"]]
+      },
+      "requests": [
+        {"anchors": {"East": {"R": "e-r"}, "West": {"R": "w-r"}}, "expected": {"status": "issued", "auc": ["0", "1/4"], "production_counts": [2, 2]}}
+      ]
+    },
+    {
+      "name": "shared-tied-grade",
+      "measurements": {
+        "East": [["P", "e-p", "positive", "2", "2"], ["Q", "e-q", "positive", "2", "2"], ["R", "e-r", "positive", "2", "2"], ["S", "e-s", "negative", "2", "2"]],
+        "West": [["P", "w-n", "negative", "8", "8"], ["R", "w-r", "positive", "8", "8"], ["S", "w-s", "positive", "8", "8"]]
+      },
+      "requests": [
+        {"anchors": {"East": {"R": "e-r", "S": "e-s"}, "West": {"R": "w-r", "S": "w-s"}}, "expected": {"status": "issued", "auc": ["1/2", "1/2"], "production_counts": [2, 1]}}
+      ]
+    },
+    {
+      "name": "inconsistent-anchor-tie",
+      "measurements": {
+        "East": [["P", "e-p", "positive", "1", "1"], ["R", "e-r", "positive", "1", "1"], ["S", "e-s", "positive", "2", "2"]],
+        "West": [["P", "w-n", "negative", "8", "8"], ["R", "w-r", "positive", "8", "8"], ["S", "w-s", "positive", "8", "8"]]
+      },
+      "requests": [
+        {"anchors": {"East": {"R": "e-r", "S": "e-s"}, "West": {"R": "w-r", "S": "w-s"}}, "expected": {"status": "incompatible"}}
+      ]
+    },
+    {
+      "name": "no-production-negative",
+      "measurements": {
+        "East": [["R", "e-r", "negative", "1", "1"]],
+        "West": [["P", "w-p", "positive", "2", "2"], ["R", "w-r", "negative", "2", "2"]]
+      },
+      "requests": [
+        {"anchors": {"East": {"R": "e-r"}, "West": {"R": "w-r"}}, "expected": {"status": "insufficient"}}
+      ]
+    }
+  ]
+}

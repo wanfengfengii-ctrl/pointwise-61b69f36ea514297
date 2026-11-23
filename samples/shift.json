@@ -1,0 +1,22 @@
+{
+  "origin": "center-demo",
+  "models": ["Line-A", "Line-B"],
+  "tickets": [
+    {"number": "P", "entity": "film-P", "stations": ["East", "West"]},
+    {"number": "Q", "entity": "film-Q", "stations": ["East", "West"]}
+  ],
+  "measurements": {
+    "East": [
+      ["P", "p-positive", "positive", "2", "2"],
+      ["P", "p-negative", "negative", "1", "1"],
+      ["Q", "q-positive", "positive", "2", "2"],
+      ["Q", "q-negative", "negative", "1", "1"]
+    ],
+    "West": [
+      ["P", "p-positive", "positive", "0", "0"],
+      ["P", "p-negative", "negative", "1", "1"],
+      ["Q", "q-positive", "positive", "2", "2"],
+      ["Q", "q-negative", "negative", "1", "1"]
+    ]
+  }
+}

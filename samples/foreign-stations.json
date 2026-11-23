@@ -1,0 +1,26 @@
+{
+  "aligned": {
+    "version": 1,
+    "package_id": "partner-aligned",
+    "source": {"origin": "partner-lab", "station": "Partner", "revision": "A1"},
+    "models": ["Line-A", "Line-B"],
+    "contributions": [
+      {"ticket": "P", "label": "positive", "scores": [[["2", 1]], [["2", 1]]]},
+      {"ticket": "P", "label": "negative", "scores": [[["1", 1]], [["1", 1]]]},
+      {"ticket": "Q", "label": "positive", "scores": [[["0", 1]], [["0", 1]]]},
+      {"ticket": "Q", "label": "negative", "scores": [[["1", 1]], [["1", 1]]]}
+    ]
+  },
+  "reverse": {
+    "version": 1,
+    "package_id": "partner-reverse",
+    "source": {"origin": "partner-lab", "station": "Partner", "revision": "A2"},
+    "models": ["Line-A", "Line-B"],
+    "contributions": [
+      {"ticket": "P", "label": "positive", "scores": [[["2", 1]], [["0", 1]]]},
+      {"ticket": "P", "label": "negative", "scores": [[["1", 1]], [["1", 1]]]},
+      {"ticket": "Q", "label": "positive", "scores": [[["0", 1]], [["2", 1]]]},
+      {"ticket": "Q", "label": "negative", "scores": [[["1", 1]], [["1", 1]]]}
+    ]
+  }
+}
